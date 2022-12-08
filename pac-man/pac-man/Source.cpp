@@ -1,7 +1,7 @@
 #include <iostream>
 #include <conio.h>
-// Definimos la variable de las filas para que tenga 30
-#define rows 30
+// Definimos la variable de las filas para que tenga 29
+#define rows 29
 // Definimos la variable de las columnas para que haya 100
 #define columns 100
 // Definimos la variable de nuestro personaje para que se vea con una "0"
@@ -202,6 +202,15 @@ void Draw() {
 	std::cout << current_score << '/' << total_score;
 }
 
+void Check() { 
+	// Comprobamos que nuestra puntuación sea igual a la máxima
+	if (current_score == total_score) {
+	// Si es así ponemos el mensaje de "HAS GANADO" y el juego deja de funcionar
+		std::cout << "\n \n \n \n \n HAS GANADO \n \n \n \n";
+		run = false;
+	}
+}
+
 int main()
 {
 // En el main ponemos que funciones estarán usandose. En este caso se usan siempre
@@ -212,5 +221,6 @@ int main()
 		Input();
 		Logic();
 		Draw();
+		Check();
 	}
 }
