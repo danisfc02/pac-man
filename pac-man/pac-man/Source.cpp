@@ -1,4 +1,5 @@
 #include <iostream>
+#include <conio.h>
 // Definimos la variable de las filas para que tenga 30
 #define rows 30
 // Definimos la variable de las columnas para que haya 100
@@ -101,8 +102,7 @@ void Setup() {
 
 void Input() {
 	// Aquí conseguimos que al pulsar una tecla se usen las funciones que creamos antes (linea 15)
-	char input;
-	std::cin >> input;
+	char input = _getch();   // Cambiamos el input para que instantaniamente al usar cualquier acción se cambie sin necesidad de pulsar enter
 	switch (input)
 	{
 	case 'w':
