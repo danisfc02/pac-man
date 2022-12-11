@@ -6,6 +6,9 @@
 #define columns 100
 // Definimos la variable de nuestro personaje para que se vea con una "0"
 #define player 'O'
+// Definimos los colores
+#define AZUL "\x1b[34m";
+#define AMARILLO "\x1b[37m";
 // Definimos como se vería en el mapa "NOTHING" "WALL" y "SCORE"
 enum TILES { NOTHING = ' ', WALL = '#', SCORE = '.' };
 // Decimos que el mapa esta formado por filas y columnas
@@ -19,7 +22,7 @@ INPUT currentInput = INPUT::UNKNOWN;
 // Creamos las variables para las posiciones del personaje y las puntuaciones
 int player_x;
 int player_y;
-int current_score = 0;
+int current_score = 21;
 int total_score;
 
 void Setup() {
@@ -190,23 +193,29 @@ void Draw() {
 		for (size_t j = 0; j < columns; j++)
 		{
 			if (i == player_y && j == player_x) {
-				std::cout << player;
+				std::cout << "\033[1;31m" << player;
+			}
+			else if (TILES::SCORE == map[i][j]) {
+				std::cout << AMARILLO; //Cambiamos el color de los puntos a amarillop
 			}
 			else {
-				std::cout << (char)map[i][j];
+				std::cout << AZUL; //Cambiamos el color de las paredes a azul al dibujarlos
 			}
+			std::cout << (char)map[i][j];
 		}
 		std::cout << std::endl;
 	}
 	// Con esto dibujamos la puntuación en la parte inferior de nuestro juego 
-	std::cout << current_score << '/' << total_score;
+
+	//std::cout << "\x1b[34m";
+	std::cout << "\x1b[34m" << current_score << '/' << total_score;
 }
 
 void Check() { 
 	// Comprobamos que nuestra puntuación sea igual a la máxima
 	if (current_score == total_score) {
 	// Si es así ponemos el mensaje de "HAS GANADO" y el juego deja de funcionar
-		std::cout << "\n \n \n \n \n HAS GANADO \n \n \n \n";
+		std::cout << "\x1b[32m" << "\n \n \n \n \n HAS GANADO \n \n \n \n" << "\x1b[37m";
 		run = false;
 	}
 }
@@ -222,5 +231,5 @@ int main()
 		Logic();
 		Draw();
 		Check();
-	}
+	}	
 }
